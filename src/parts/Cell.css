@@ -1,0 +1,30 @@
+.cellStyle {
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+.selected {
+    background-color: green;
+}
+
+.unselected {
+    background-color: whitesmoke;
+}
+
+.source {
+    background-color: darkgreen;
+}
+
+.destination {
+    background-color: red;
+}
+
+.explored {
+    background-color: orange;
+}
+
+.blocked {
+    background-color: black;
+}
