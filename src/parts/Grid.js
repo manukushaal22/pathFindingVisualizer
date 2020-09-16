@@ -17,7 +17,7 @@ class Grid extends React.Component {
     }
 
     componentDidMount(){
-        this.resetGrid();
+        this.resetGrid(this.props.rows,this.props.cols);
     }
 
     clearHistory = () => {
@@ -25,11 +25,11 @@ class Grid extends React.Component {
         this.resetGrid();
     }
 
-    resetGrid = () => {
+    resetGrid = (rows,cols) => {
         let grid = [];
-        for(let i = 0; i < this.props.size; i++){
+        for(let i = 0; i < rows; i++){
             let row = [];
-            for(let j = 0; j < this.props.size; j++){
+            for(let j = 0; j < cols; j++){
                 row.push("unselected");
             }
             grid.push(row);
@@ -39,7 +39,7 @@ class Grid extends React.Component {
             source: [],
             destination: [],
             selectedNumber: 0
-        });
+        })
     }
 
     clicked = (i,j) => {
@@ -65,7 +65,6 @@ class Grid extends React.Component {
             if(this.state.selectedNumber === 1){
                 destination = [i,j];
                 newGrid[i][j] = "destination";
-                console.log(newGrid)
             }
             let pq = this.state.printQueue;
             pq.push({x:i,y:j})
@@ -108,7 +107,7 @@ class Grid extends React.Component {
         let rows = [];
         for(let i = 0; i < this.state.grid.length; i++) {
             let row = [];
-            for (let j = 0; j < this.state.grid.length; j++) {
+            for (let j = 0; j < this.state.grid[0].length; j++) {
                 row.push(<Cell onMouseEnter={() => this.mouseEntered(i,j)} onMouseUp={this.setMouseStateUp} onMouseDown={()=>this.clicked(i,j)} phase={this.state.grid[i][j]}/>);
             }
             rows.push(<div style={{flex: 1, flexDirection: "row"}}>{row}</div>);
@@ -117,15 +116,16 @@ class Grid extends React.Component {
     }
 
     render() {
+        
         return (
             <div>
                 {this.processGrid()}
                 <br/>
                 <button onClick={()=>findPath(this)}>Find Path</button>
-                <button onClick={this.resetGrid}>Reset Grid</button>
+                <button onClick={() => this.resetGrid(this.props.rows,this.props.cols)}>Reset Grid</button>
                 <button onClick={()=>rewindFindPath(this)}>Rewind</button>
                 <button onClick={()=>historyPrinter(this)}>Print History</button>
-                <button onClick={this.clearHistory}>Clear History</button>
+                <button onClick={() => this.clearHistory}>Clear History</button>
             </div>
         );
     }

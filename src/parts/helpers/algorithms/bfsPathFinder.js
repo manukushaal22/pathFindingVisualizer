@@ -1,9 +1,9 @@
 const findShortestPathbyBFS = function(component, source, grid) {
     let visited = [];
-    for(let i = 0; i < component.props.size; i++){
+    for(let i = 0; i < component.props.rows; i++){
         let row = [];
-        for(let j = 0; j < component.props.size; j++){
-            if(grid[i][j]==="blocked")
+        for(let j = 0; j < component.props.cols; j++){
+            if(grid[i][j]=="blocked")
                 row.push(true);
             else
                 row.push(false)
@@ -32,7 +32,7 @@ const findShortestPathbyBFS = function(component, source, grid) {
 
 const exploreCell = function(component, tmp, visited, path, queue, grid){
     let valid = (cell) => {
-        return cell.x>=0 && cell.x<component.props.size && cell.y>=0 && cell.y<component.props.size;
+        return cell.x>=0 && cell.x<component.props.rows && cell.y>=0 && cell.y<component.props.cols;
     }
     if (valid(tmp) && !visited[tmp.x][tmp.y]) {
         if (grid[tmp.x][tmp.y] === "destination") {
