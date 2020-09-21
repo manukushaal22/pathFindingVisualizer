@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
-import './parts/Grid'
-import Grid from "./parts/Grid";
+import Application from "./parts/Application";
 
 function App() {
   return (
     <div className="App">
-      <Grid size={25}/>
+        <Application/>
     </div>
   );
 }

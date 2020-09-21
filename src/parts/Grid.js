@@ -6,17 +6,20 @@ class Grid extends React.Component {
 
     constructor(props) {
         super(props);
+        let cellSize = 50/props.size;
         this.state = {
             grid: [],
             source: [],
             destination: [],
             selectedNumber: 0,
             isMouseDown: false,
-            printQueue: []
+            printQueue: [],
+            cellSize: cellSize,
         };
     }
 
     componentDidMount(){
+        console.log("compdidmount")
         this.resetGrid();
     }
 
@@ -109,11 +112,15 @@ class Grid extends React.Component {
         for(let i = 0; i < this.state.grid.length; i++) {
             let row = [];
             for (let j = 0; j < this.state.grid.length; j++) {
-                row.push(<Cell onMouseEnter={() => this.mouseEntered(i,j)} onMouseUp={this.setMouseStateUp} onMouseDown={()=>this.clicked(i,j)} phase={this.state.grid[i][j]}/>);
+                row.push(<Cell onMouseEnter={() => this.mouseEntered(i,j)} onMouseUp={this.setMouseStateUp} onMouseDown={()=>this.clicked(i,j)} phase={this.state.grid[i][j]} cellSize={this.state.cellSize}/>);
             }
-            rows.push(<div style={{flex: 1, flexDirection: "row"}}>{row}</div>);
+            rows.push(<div className={"cellRow"} style={{
+                flex: 1,
+                flexDirection: "row",
+                margin: 0
+            }}>{row}</div>);
         }
-        return (<div>{rows}</div>);
+        return (<div className={"grid"}>{rows}</div>);
     }
 
     render() {

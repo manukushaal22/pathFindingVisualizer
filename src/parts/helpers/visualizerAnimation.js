@@ -19,12 +19,21 @@ const findPath = function(component){
 
     setTimeout(() => {
         for(let i=component.state.destination[0]+1;i<=component.state.source[0];i++){
-            newGrid[i][component.state.destination[1]] = "selected";
+            newGrid[i][component.state.destination[1]] = newGrid[i][component.state.destination[1]]==="selected"?"source":"selected";
         }
-        for(let i=component.state.destination[1];i<component.state.source[1];i++){
-            newGrid[component.state.source[0]][i] = "selected";
+        for(let i=component.state.destination[1]+1;i<component.state.source[1];i++){
+            newGrid[component.state.source[0]][i] = newGrid[component.state.source[0]][i]==="selected"?"source":"selected";
         }
         component.setState({grid:newGrid})
+        setInterval(() => {
+            for(let i=component.state.destination[0]+1;i<=component.state.source[0];i++){
+                newGrid[i][component.state.destination[1]] = newGrid[i][component.state.destination[1]]==="selected"?"source":"selected";
+            }
+            for(let i=component.state.destination[1]+1;i<component.state.source[1];i++){
+                newGrid[component.state.source[0]][i] = newGrid[component.state.source[0]][i]==="selected"?"source":"selected";
+            }
+            component.setState({grid:newGrid})
+        },200)
     },timegap*path.length);
 }
 
