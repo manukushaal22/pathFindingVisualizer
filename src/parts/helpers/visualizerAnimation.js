@@ -9,7 +9,7 @@ const findPath = function(component){
     let newGrid = component.state.grid;
     let path = findShortestPathByBFS(component, component.state.source, newGrid);
     console.log(path)
-    for(let i=1;i<path.length-1;i++){
+    for(let i=1;i<=path.length-1;i++){
         setTimeout(() => {
             component.setState({grid:newGrid}, () => {
                 newGrid[path[i].x][path[i].y] = "explored";
@@ -25,7 +25,11 @@ const findPath = function(component){
             newGrid[component.state.source[0]][i] = newGrid[component.state.source[0]][i]==="selected"?"source":"selected";
         }
         component.setState({grid:newGrid})
-        setInterval(() => {
+        let x=0;
+        let intervalID = setInterval(() => {
+            if (++x === 20) {
+                window.clearInterval(intervalID);
+            }
             for(let i=component.state.destination[0]+1;i<=component.state.source[0];i++){
                 newGrid[i][component.state.destination[1]] = newGrid[i][component.state.destination[1]]==="selected"?"source":"selected";
             }

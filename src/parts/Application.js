@@ -10,27 +10,27 @@ class Application extends React.Component {
         };
     }
 
-    valuetext = function(value) {
+    valuetext = (value) => {
         return `${value}`;
     }
 
-    changeSize = function (e, number) {
+    changeSize = (e,number) => {
         this.setState({gridSize: number})
     }
 
     render() {
         return (
-            <div>
+            <div style={{marginTop:"5vw"}}>
                 <Slider
                     defaultValue={this.state.gridSize}
-                    getAriaValueText={this.valuetext}
+                    getAriaValueText={() => this.valuetext()}
                     aria-labelledby="discrete-slider"
                     valueLabelDisplay="auto"
                     step={2}
                     marks={true}
                     min={2}
                     max={25}
-                    onChange={this.changeSize.bind(this)}
+                    onChange={this.changeSize}
                     style={{width:"50vh"}}
                 />
                 <Grid key={this.state.gridSize} size={this.state.gridSize}/>
