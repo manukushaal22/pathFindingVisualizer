@@ -1,5 +1,6 @@
 import React from 'react';
 import Cell from "./Cell";
+import Button from "@material-ui/core/Button";
 import { findPath, rewindFindPath, historyPrinter} from "./helpers/visualizerAnimation";
 
 class Grid extends React.Component {
@@ -126,11 +127,13 @@ class Grid extends React.Component {
             <div>             
                 {this.processGrid()}
                 <br/>
-                <button onClick={()=>findPath(this)}>Find Path</button>
-                <button onClick={() => this.resetGrid()}>Reset Grid</button>
-                <button onClick={()=>rewindFindPath(this)}>Rewind</button>
-                <button onClick={()=>historyPrinter(this)}>Print History</button>
-                <button onClick={this.clearHistory}>Clear History</button>
+                <div>
+                    <Button style={{marginRight:"1.35vw"}} variant="contained" color="primary" onClick={()=>findPath(this)}>Find Path</Button>
+                    <Button style={{marginRight:"1.35vw"}} variant="contained" color="primary" onClick={() => this.resetGrid()}>Reset Grid</Button>
+                    <Button variant="contained" color="primary" onClick={()=>rewindFindPath(this)}>Rewind</Button>
+                    {/* <Button variant="contained" color="primary" onClick={()=>historyPrinter(this)}>Print History</Button>
+                    <Button variant="contained" color="primary" onClick={this.clearHistory}>Clear History</Button> */}
+                </div>
             </div>
         );
     }
