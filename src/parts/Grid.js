@@ -19,7 +19,6 @@ class Grid extends React.Component {
     }
 
     componentDidMount(){
-        console.log("compdidmount")
         this.resetGrid();
     }
 
@@ -68,7 +67,6 @@ class Grid extends React.Component {
             if(this.state.selectedNumber === 1){
                 destination = [i,j];
                 newGrid[i][j] = "destination";
-                console.log(newGrid)
             }
             let pq = this.state.printQueue;
             pq.push({x:i,y:j})
@@ -125,11 +123,11 @@ class Grid extends React.Component {
 
     render() {
         return (
-            <div>
+            <div>             
                 {this.processGrid()}
                 <br/>
                 <button onClick={()=>findPath(this)}>Find Path</button>
-                <button onClick={this.resetGrid}>Reset Grid</button>
+                <button onClick={() => this.resetGrid()}>Reset Grid</button>
                 <button onClick={()=>rewindFindPath(this)}>Rewind</button>
                 <button onClick={()=>historyPrinter(this)}>Print History</button>
                 <button onClick={this.clearHistory}>Clear History</button>
