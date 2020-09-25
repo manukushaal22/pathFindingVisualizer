@@ -8,8 +8,7 @@ const findPath = function(component){
         return;
     let newGrid = component.state.grid;
     let path = findShortestPathByBFS(component, component.state.source, newGrid);
-    console.log(path)
-    for(let i=1;i<=path.length-1;i++){
+    for(let i=1;i<path.length-1;i++){
         setTimeout(() => {
             component.setState({grid:newGrid}, () => {
                 newGrid[path[i].x][path[i].y] = "explored";
@@ -68,7 +67,6 @@ const rewindFindPath = (component) => {
 
 const historyPrinter = (component) => {
     let path = component.state.printQueue
-    console.log(path)
     let newGrid = component.state.grid;
     for(let i=1;i<path.length-1;i++){
         setTimeout(() => {
